@@ -1,0 +1,34 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)" #form="ngForm">
+  <div class="form-group">
+    <mat-form-field>
+      <input formControlName="firstName" class="form-control" matInput placeholder="Enter first name">
+    </mat-form-field>
+    <p class="text-danger" *ngIf="registrationForm.controls.firstName.errors?.required && form.submitted">First name is required</p>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <input formControlName="lastName" class="form-control" type="text" matInput placeholder="Enter last name">
+    </mat-form-field>
+    <p class="text-danger" *ngIf="registrationForm.controls.lastName.errors?.required && form.submitted">Last name is required</p>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <input formControlName="email" class="form-control" type="text" matInput placeholder="Enter email">
+    </mat-form-field>
+    <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.required && form.submitted">Email is required</p>
+    <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.invalidEmail && form.submitted">Email is wrong</p>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <input formControlName="username" class="form-control" text="text" matInput placeholder="Enter username">
+    </mat-form-field>
+    <p class="text-danger" *ngIf="registrationForm.controls.username.errors?.required && form.submitted">Username is required</p>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <input formControlName="password" class="form-control" type="password" matInput placeholder="Enter password">
+    </mat-form-field>
+    <p class="text-danger" *ngIf="registrationForm.controls.password.required && form.submitted">Password is required</p>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
