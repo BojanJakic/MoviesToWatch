@@ -3,7 +3,7 @@
     <mat-form-field>
       <input formControlName="firstName" class="form-control" matInput placeholder="Enter first name">
     </mat-form-field>
-    <p class="text-danger" *ngIf="registrationForm.controls.firstName.errors?.required && form.submitted">First name is required</p>
+    <div class="text-danger error-message" *ngIf="registrationForm.controls.firstName.errors?.required && form.submitted">First name is required</div>
   </div>
   <div class="form-group">
     <mat-form-field>
@@ -16,7 +16,7 @@
       <input formControlName="email" class="form-control" type="text" matInput placeholder="Enter email">
     </mat-form-field>
     <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.required && form.submitted">Email is required</p>
-    <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.invalidEmail && form.submitted">Email is wrong</p>
+    <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.invalidEmail && form.submitted">Email already exists</p>
   </div>
   <div class="form-group">
     <mat-form-field>

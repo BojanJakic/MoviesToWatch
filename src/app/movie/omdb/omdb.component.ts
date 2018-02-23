@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms'
-import { OmdbService } from '../services/omdb/omdb.service'
-import { Movie } from '../shared/movie'
-import { MovieService } from '../services/movie/movie.service'
+import { OmdbService } from '../../services/omdb/omdb.service'
+import { Movie } from '../../shared/movie'
+import { MovieService } from '../../services/movie/movie.service'
 
 @Component({
   selector: 'app-omdb',
@@ -12,9 +12,9 @@ import { MovieService } from '../services/movie/movie.service'
 export class OmdbComponent implements OnInit {
 
   listOfMovies: Movie[] = []
-  movie: Movie = new Movie()
+  movie: Movie = new Movie
   searchField: FormControl = new FormControl()
-
+  
   constructor(private omdbService: OmdbService, private movieService: MovieService) { }
 
   ngOnInit() {
@@ -30,8 +30,9 @@ export class OmdbComponent implements OnInit {
   }
 
   public saveMovie() {
-    this.movieService.saveMovie(this.movie)// .subscribe(data => {
-     // console.log(data)
-    //})
+    console.log('component')
+    this.movieService.saveMovie(this.movie).subscribe(data => {
+      console.log('response : ' + data)
+    })
   }
 }
