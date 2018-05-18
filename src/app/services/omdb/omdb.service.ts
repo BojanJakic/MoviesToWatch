@@ -7,13 +7,26 @@ import { Movie } from '../../shared/movie'
 @Injectable()
 export class OmdbService {
 
-  private url = 'http://www.omdbapi.com/?apikey=cfbcc375&s='
+  private urlAll = 'http://www.omdbapi.com/?apikey=cfbcc375&s='
+  private urlOne = 'http://www.omdbapi.com/?apikey=cfbcc375&i='
 
   constructor(private http: Http) { }
 
-  public getOmdbMovies(usersInput: string): Observable<Movie[]> {
-    return this.http.get(this.url + usersInput).map((response: Response) => {
+  getMovies = (usersInput: string): Observable<Movie[]> => {
+    return this.http.get(this.urlAll + usersInput).map((response: Response) => {
       return <Movie[]>response.json().Search
+    })
+  }
+
+  getMovieById(id: string): Observable<Movie> {
+    return this.http.get(this.urlOne + id).map((response: Response) => {
+      return <Movie>response.json()
+    })
+  }
+
+  getPoster = (url: string): Observable<any> => {
+    return this.http.get(url).map((response: Response) => {
+      return response.json()
     })
   }
 }

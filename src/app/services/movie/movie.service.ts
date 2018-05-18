@@ -1,27 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http'
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http'
+import { HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import 'rxjs/add/operator/map'
 import { Movie } from '../../shared/movie'
 import 'rxjs/add/operator/catch';
+import { LocalStorageService } from '../local-storage/local.storage.service'
 
 @Injectable()
 export class MovieService {
 
   private url = 'http://localhost:4000'
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private localStorage: LocalStorageService) { }
 
-  public saveMovie(movie: Movie): Observable<string> {
-    return this.http.post(this.url + '/api/save/movie', movie).map(res => {
-      return res.status
+  saveMovie = (movie: Movie): Observable<any> => {
+
+    let token
+    const localStorageToken = this.localStorage.getToken()
+    localStorageToken ? token = 'Authorization:Bearer ' + localStorageToken : token = null
+    //const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    return this.http.post(this.url + '/api/save/movie', { token: token, movie: movie }).map(res => {
+      return res.json()
     }).catch((error: any) => {
       return Observable.throw(error.json ? error.json().error : error || 'Server error')
     });
   }
 
-  public getAllMovies(): Observable<Movie[]> {
-    return this.http.get(this.url + '/find/movie').map(res => {
+  getAllMovies = (): Observable<Movie[]> => {
+    return this.http.get(this.url + '/api/findAll/movie').map(res => {
       return res.json()
     })
   }

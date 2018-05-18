@@ -1,6 +1,19 @@
 <div *ngIf="movie.Title" >
-<mat-grid-list cols="1" rowHeight="15px">
-  <mat-grid-tile>Movie name : {{ movie.Title }}</mat-grid-tile>
-  <mat-grid-tile>Movie year : {{ movie.Year }}</mat-grid-tile>
+<mat-grid-list cols="1" rowHeight="35px">
+  <mat-grid-tile>Name : {{ movie.Title }}</mat-grid-tile>
+  <mat-grid-tile>Year : {{ movie.Year }}</mat-grid-tile>
+  <mat-grid-tile>Actors : {{ movie.Actors }}</mat-grid-tile>
+  <mat-grid-tile>Writer : {{ movie.Writer }}</mat-grid-tile>
+  <mat-grid-tile>Released : {{ movie.Released }}</mat-grid-tile>
+  <mat-grid-tile>Runtime : {{ movie.Runtime }}</mat-grid-tile>
+  <mat-grid-tile>Director : {{ movie.Director }}</mat-grid-tile>
+  <mat-grid-tile>Country : {{ movie.Country }}</mat-grid-tile>
+  <mat-grid-tile>Genre : {{ movie.Genre }}</mat-grid-tile>
+  <mat-grid-tile>Awards : {{ movie.Awards }}</mat-grid-tile>
+  <mat-grid-tile>Plot : {{ movie.Plot }}</mat-grid-tile>
+  <mat-grid-tile>Production : {{ movie.Production }}</mat-grid-tile>
+  <!-- <mat-grid-tile>Poster : <button (click)="getPoster(movie.Poster)">see image</button></mat-grid-tile> -->
+  <img src={{movie.Poster}} alt="N/A">
 </mat-grid-list>
+<button (click)="voteMovie(movie.imdbID)">Vote</button>
 </div>

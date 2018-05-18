@@ -1,29 +1,40 @@
 import Movie from '../models/movie'
+import { AuthService } from '../authentication/auth-service'
 
 export class MovieCtrl {
 
-    public saveMovie(req, res) {
-        const movie = new Movie(req.body)
-        movie.save((error, result) => {
-            if(!error) {
+    constructor() { }
+
+    saveMovie = (req, res) => {
+        const movie = new Movie(req.body.movie)
+        Movie.find({ savedBy: movie.savedBy }, (error, result) => {
+            if (!error) {
+                console.log('no error  '  + result.length)
+                if (result.length === 3) {
+                    res.json({ success: false, message: 'You have already saved three movies in this month' })
+                } else {
+                    movie.save((error, result) => {
+                        if (!error) {
+                            return res.json({ success: true, message: "Movie " + req.body.movie.Title + " has been saved successfully!" })
+                        } else {
+                            if (error.code === 11000) {
+                                res.json({ success: false, message: 'already exists' })
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    findAll = (req, res) => {
+        Movie.find((error, result) => {
+            if (!error) {
                 return res.json(result)
-            }else {
+            } else {
                 return res.json(error)
             }
         })
     }
 }
-
-
-    // export const saveMovie = (req, res) => {
-    //     console.log('ctrl')
-    //     const movie = new Movie(req.body)
-    //     movie.save((error, result) => {
-    //         if(error) {
-    //             return res.json(error)
-    //         }else{
-    //             return res.json(result)
-    //         }
-    //     })
-    // }
 

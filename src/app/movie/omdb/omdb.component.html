@@ -1,12 +1,18 @@
 <mat-form-field>
   <input matInput [matAutocomplete]="auto" placeholder="Enter movie title" [formControl]="searchField">
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let movie of listOfMovies" [value]="movie.Title" (click)="showMovieDetails(movie)">
+    <mat-option *ngFor="let movie of listOfMovies" [value]="movie.Title" (click)="showMovieDetails(movie.imdbID)">
       {{ movie.Title }}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
 <div>
   <app-movie-overview [movie]="movie"></app-movie-overview>
-  <button (click)="saveMovie()">Save Movie</button>
+  <button class="btn btn-primary" (click)="saveMovie()">Save Movie</button>
+  <!-- <button mat-button color="warn">Click</button>
+  <button mat-raised-button>Click</button>
+  <button mat-raised-button color="primary">Click</button>
+  <button mat-raised-button color="acent">Click</button>
+  <button mat-raised-button color="warn">Click</button>
+  <button mat-fab-button>Click</button> -->
 </div>

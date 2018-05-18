@@ -17,18 +17,23 @@
     </mat-form-field>
     <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.required && form.submitted">Email is required</p>
     <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.invalidEmail && form.submitted">Email already exists</p>
+    <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.pattern && form.submitted">Invalid email format</p>
+    <p class="text-danger" *ngIf="registrationForm.controls.email.errors?.maxlength && form.submitted">Max number of characters is 254</p>
   </div>
   <div class="form-group">
     <mat-form-field>
       <input formControlName="username" class="form-control" text="text" matInput placeholder="Enter username">
     </mat-form-field>
     <p class="text-danger" *ngIf="registrationForm.controls.username.errors?.required && form.submitted">Username is required</p>
+    <p class="text-danger" *ngIf="registrationForm.controls.username.errors?.invalidUsername && form.submitted">Username already exists</p>
+    <p class="text-danger" *ngIf="(registrationForm.controls.username.errors?.minlength || registrationForm.controls.username.errors?.maxlength) && form.submitted">Enter between 3 and 16 characters</p>
   </div>
   <div class="form-group">
     <mat-form-field>
       <input formControlName="password" class="form-control" type="password" matInput placeholder="Enter password">
     </mat-form-field>
-    <p class="text-danger" *ngIf="registrationForm.controls.password.required && form.submitted">Password is required</p>
+    <p class="text-danger" *ngIf="registrationForm.controls.password.errors?.required && form.submitted">Password is required</p>
+    <p class="text-danger" *ngIf="(registrationForm.controls.password.errors?.minlength || registrationForm.controls.password.errors?.maxlength) && form.submitted">Enter between 3 and 16 characters</p>
   </div>
   <button type="submit" class="btn btn-primary">Save</button>
 </form>
