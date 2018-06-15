@@ -17,7 +17,7 @@ export class OmdbComponent implements OnInit {
   movie: Movie = new Movie
   searchField: FormControl = new FormControl()
   
-  constructor(private omdbService: OmdbService, private movieService: MovieService, private localStorage: LocalStorageService, private toastr: ToastrHandler) { }
+  constructor(private omdbService: OmdbService, private movieService: MovieService, private localStorageService: LocalStorageService, private toastr: ToastrHandler) { }
 
   ngOnInit() {
     this.searchField.valueChanges.subscribe(usersInput => {
@@ -35,10 +35,13 @@ export class OmdbComponent implements OnInit {
 
   saveMovie = () => {
     let userId = ''
-    const user = this.localStorage.getUser()
+    const user = this.localStorageService.getUser()
     user ? userId = user._id : userId = '0'
     this.movie.savedBy = userId
     this.movieService.saveMovie(this.movie).subscribe(data => {
+      if(data.newAccessToken) {
+        this.localStorageService.setNewAccessToken(data.newAccessToken)
+      }
       this.toastr.showMessage(data)
     })
   }

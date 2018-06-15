@@ -16,11 +16,16 @@ export class MovieService {
 
   saveMovie = (movie: Movie): Observable<any> => {
 
-    let token
-    const localStorageToken = this.localStorage.getToken()
-    localStorageToken ? token = 'Authorization:Bearer ' + localStorageToken : token = null
-    //const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
-    return this.http.post(this.url + '/api/save/movie', { token: token, movie: movie }).map(res => {
+    let accessToken;
+    let refreshToken
+    const localStorageToken = this.localStorage.getTokens()
+    const localStorageUser = this.localStorage.getUser()
+    
+      console.log(localStorageToken)
+    
+    localStorageToken ? (accessToken = localStorageToken.accessToken, refreshToken = localStorageToken.refreshToken) : (accessToken = null, refreshToken = null)
+    //const headers = new HttpHeaders()
+    return this.http.post(this.url + '/api/save/movie', { accessToken: accessToken, refreshToken: refreshToken, movie: movie, user: localStorageUser }).map(res => {
       return res.json()
     }).catch((error: any) => {
       return Observable.throw(error.json ? error.json().error : error || 'Server error')

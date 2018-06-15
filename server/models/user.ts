@@ -34,7 +34,6 @@ userSchema.methods.setPassword = (password: string) => {
 }
 
 userSchema.methods.isPasswordValid = (password: string, dbPassword: string) => {
-    console.log(password + '  getpassword  ' + dbPassword)
     return bcrypt.compare(password, dbPassword)
 }
 

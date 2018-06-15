@@ -25,6 +25,7 @@ import { ValidatorService } from './services/user/validator.service';
 import { LoginComponent } from './login/login.component'
 import { LocalStorageService } from './services/local-storage/local.storage.service'
 import { LoginService } from './services/login/login.service'
+import { VoteService } from './services/vote/vote.service'
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component'
 import { ToastrCustomOptions } from './shared/toastr-custom-options'
@@ -55,7 +56,7 @@ import { ToastrHandler } from './toastr/toastr-handler'
     ToastModule.forRoot()
   ],
   providers: [
-    OmdbService, MovieService, UserService, ValidatorService, LocalStorageService, LoginService, ToastrHandler,
+    OmdbService, MovieService, UserService, ValidatorService, LocalStorageService, LoginService, ToastrHandler, VoteService,
     { provide: ToastOptions, useClass: ToastrCustomOptions }
   ],
   bootstrap: [AppComponent]

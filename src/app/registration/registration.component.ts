@@ -23,7 +23,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = new FormGroup({
       firstName: new FormControl(this.user.firstName, [Validators.required]),
       lastName: new FormControl(this.user.lastName, [Validators.required]),
-      email: new FormControl(this.user.email, [Validators.required, Validators.maxLength(10), Validators.pattern("^[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\.[a-zA-Z]{2,}")], [this.validateEmail]),
+      email: new FormControl(this.user.email, [Validators.required, Validators.maxLength(254), Validators.pattern("^[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\.[a-zA-Z]{2,}")], [this.validateEmail]),
       username: new FormControl(this.user.username, [Validators.required, Validators.minLength(3), Validators.maxLength(16)], [this.validateUsername]),
       password: new FormControl(this.user.password, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
     })
@@ -61,3 +61,10 @@ export class RegistrationComponent implements OnInit {
     })
   }
 }
+// abc@abc.ba
+// 12345
+//12345
+
+// h@h.com
+// 98765
+// 98765

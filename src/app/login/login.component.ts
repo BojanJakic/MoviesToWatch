@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   login = (form: FormGroup) => {
     this.loginService.login(form.value.username, form.value.password).subscribe((result) => {
       if (result.success) {
-        this.localStorage.saveToken(result.token)
+        this.localStorage.saveTokens(result.tokens)
         this.localStorage.saveUser(result.user)
         this.router.navigate(['/'])
       }
@@ -36,7 +36,13 @@ export class LoginComponent implements OnInit {
   }
 
   logout = () => {
-    this.localStorage.deleteToken()
-    this.localStorage.deleteUser()
+    this.loginService.logout().subscribe((result) => {
+      if(result.success) {
+        this.localStorage.deleteTokens()
+        this.localStorage.deleteUser()
+        this.router.navigate(['/'])
+      }
+      this.toasts.showMessage(result)
+    })
   }
 }

@@ -8,16 +8,22 @@ export class LocalStorageService {
 
   constructor() { }
 
-  saveToken = (token: string) => {
-    localStorage.setItem('jwt-movie2watch', token)
+  saveTokens = (tokens: {}) => {
+    localStorage.setItem('jwt-movie2watch', JSON.stringify(tokens))
   }
 
-  getToken = () => {
-    return localStorage.getItem('jwt-movie2watch')
+  getTokens = () => {
+    return JSON.parse(localStorage.getItem('jwt-movie2watch'))
   }
 
-  deleteToken = () => {
+  deleteTokens = () => {
     localStorage.removeItem('jwt-movie2watch')
+  }
+
+  setNewAccessToken = (newAccessToken: string) => {
+    let tokens = this.getTokens()
+    tokens.accessToken = newAccessToken
+    this.saveTokens(tokens)
   }
 
   saveUser = (user: User) => {
