@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../../shared/movie'
 import { OmdbService } from '../../services/omdb/omdb.service'
 import { VoteService } from '../../services/vote/vote.service'
-import { LocalStorageService } from '../../services/local-storage/local.storage.service'
+import { UserService } from '../../services/user/user.service'
 
 @Component({
   selector: 'app-movie-overview',
@@ -12,8 +12,9 @@ import { LocalStorageService } from '../../services/local-storage/local.storage.
 export class MovieOverviewComponent implements OnInit {
 
   @Input() movie: Movie
+  show: boolean = false
 
-  constructor(private omdbService: OmdbService, private voteService: VoteService, private localStorageService: LocalStorageService) { }
+  constructor(private omdbService: OmdbService, private voteService: VoteService, private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -34,7 +35,10 @@ export class MovieOverviewComponent implements OnInit {
     // this.voteService.voteMovie(userId, movieId, token).subscribe(data => {
     //   console.log(data)
     // })
-    this.localStorageService.setNewAccessToken('aaaaaaaaaaaaa')
+    this.userService.voteMovie(movieId).subscribe(data => {
+      console.log(data)
+    })
   }
+  //test1, test1, test1@test1.ba
 
 }

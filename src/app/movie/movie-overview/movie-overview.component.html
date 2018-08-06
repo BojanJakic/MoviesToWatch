@@ -12,8 +12,9 @@
   <mat-grid-tile>Awards : {{ movie.Awards }}</mat-grid-tile>
   <mat-grid-tile>Plot : {{ movie.Plot }}</mat-grid-tile>
   <mat-grid-tile>Production : {{ movie.Production }}</mat-grid-tile>
+  <mat-grid-tile *ngIf="show">Voices : {{ movie.voices }}</mat-grid-tile>
   <!-- <mat-grid-tile>Poster : <button (click)="getPoster(movie.Poster)">see image</button></mat-grid-tile> -->
   <img src={{movie.Poster}} alt="N/A">
 </mat-grid-list>
-<button (click)="voteMovie(movie.imdbID)">Vote</button>
+<button (click)="voteMovie(movie._id)">Vote</button>
 </div>

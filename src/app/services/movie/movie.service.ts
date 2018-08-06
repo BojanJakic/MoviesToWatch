@@ -21,10 +21,8 @@ export class MovieService {
     const localStorageToken = this.localStorage.getTokens()
     const localStorageUser = this.localStorage.getUser()
     
-      console.log(localStorageToken)
-    
     localStorageToken ? (accessToken = localStorageToken.accessToken, refreshToken = localStorageToken.refreshToken) : (accessToken = null, refreshToken = null)
-    //const headers = new HttpHeaders()
+  
     return this.http.post(this.url + '/api/save/movie', { accessToken: accessToken, refreshToken: refreshToken, movie: movie, user: localStorageUser }).map(res => {
       return res.json()
     }).catch((error: any) => {

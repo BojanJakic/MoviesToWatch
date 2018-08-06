@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const tokenSchema = new mongoose.Schema({
     userId: {
@@ -11,6 +11,6 @@ const tokenSchema = new mongoose.Schema({
     }
 })
 
-const Token = mongoose.model('Token', tokenSchema)
+const RefreshToken = mongoose.model('Token', tokenSchema)
 
-export default Token
+module.exports = RefreshToken

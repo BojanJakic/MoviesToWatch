@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const movieSchema = new mongoose.Schema({
     imdbID: {
@@ -58,14 +58,16 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    voters: [
-        { userId: String }
-    ],
+    voices: {
+        type: Number,
+        default: 0
+    },
     savedBy: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        required: true
     }
 })
 
 const Movie = mongoose.model('Movie', movieSchema)
 
-export default Movie;
+module.exports = Movie;
